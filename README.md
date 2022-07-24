@@ -1,4 +1,4 @@
-## docker-laravel
+## docker-slim
 ## Usage
 1. create and start containers
     ```
