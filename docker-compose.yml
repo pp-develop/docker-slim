@@ -1,0 +1,31 @@
+version: '3.9'
+
+services:
+  slim:
+    image: slim:v1
+    build: ./dockerfile/php
+    # command: php -S 0.0.0.0:80 -t public
+    container_name: slim
+    ports:
+      - 80:80
+    volumes:
+      - ./src:/var/www/html
+      # - ./src/logs:/var/www/logs
+      - ./dockerfile/php/php.ini:/usr/local/etc/php/php.ini
+
+  mysql:
+    image: mysql:8.0
+    container_name: slim_mysql
+    volumes:
+      - ./mysql:/var/lib/mysql
+    ports:
+      - 3306:3306
+    environment:
+      - MYSQL_DATABASE=dev_db
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_USER=dev
+      - MYSQL_PASSWORD=dev
+
+networks:
+  default:
+    name: slim
